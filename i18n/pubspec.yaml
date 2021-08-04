@@ -1,0 +1,5 @@
+name: i18n
+environment:
+  sdk: '>=2.13.4 <3.0.0'
+dev_dependencies: 
+  test: ^1.17.10
