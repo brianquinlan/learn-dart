@@ -36,10 +36,11 @@ List<String>? matchPattern(String pattern, List<String> words) {
 void main() async {
   final file = File('/usr/share/dict/words');
   List<String> words = [];
-  Stream<String> lines = file.openRead()
-    .transform(utf8.decoder)       // Decode bytes to UTF-8.
-    .transform(LineSplitter());    // Convert stream to individual lines.
-    
+  Stream<String> lines = file
+      .openRead()
+      .transform(utf8.decoder) // Decode bytes to UTF-8.
+      .transform(LineSplitter()); // Convert stream to individual lines.
+
   try {
     await for (var line in lines) {
       line = line.trim();
@@ -51,7 +52,8 @@ void main() async {
     print('Error: $e');
   }
 
-  await for (var pattern in stdin.transform(utf8.decoder).transform(LineSplitter())) {
+  await for (var pattern
+      in stdin.transform(utf8.decoder).transform(LineSplitter())) {
     print(matchPattern(pattern, words));
   }
 }

@@ -1,26 +1,48 @@
 import 'package:test/test.dart';
 import 'naive.dart';
 
-/*
-#[test]
-fn match_number_letter_number_letter_number() {
-    let words = vec![
-            "antianthropomorphism".to_string(),
-            "institutionalization".to_string(),
-            "intercrystallization".to_string(),
-            "internationalization".to_string(),
-            "internationalizationy".to_string()];
-    let mut matches = match_pattern("2t2n14", &words);
-    matches.sort();
-    assert_eq!(matches, ["antianthropomorphism", "internationalization"]);
-}
-*/
-
 void main() {
-  test('letter number letter number', () {
-    var words = ["antianthropomorphism", "institutionalization", "intercrystallization", "internationalization", "internationalizationy"];
+  test('number only', () {
+    var words = ["cat", "glow", "slow", "cow", "your"];
 
-    expect(matchPattern("2t2n14", words), equals(["antianthropomorphism", "internationalization"]));
+    expect(matchPattern("4", words), equals(["glow", "slow", "your"]));
+  });
+
+  test('number only no match', () {
+    var words = ["cat", "glow", "slow", "cow", "your"];
+
+    expect(matchPattern("7", words), equals([]));
+  });
+
+  test('letters only', () {
+    var words = ["cat", "glow", "slow", "cow", "your"];
+
+    expect(matchPattern("glow", words), equals(["glow"]));
+  });
+
+  test('letters only no match', () {
+    var words = ["cat", "glow", "slow", "cow", "your"];
+
+    expect(matchPattern("slim", words), equals([]));
+  });
+
+  test('letters number letter', () {
+    var words = ["cat", "glow", "slow", "cow", "cot"];
+
+    expect(matchPattern("c1t", words), equals(["cat", "cot"]));
+  });
+
+  test('letter number letter number', () {
+    var words = [
+      "antianthropomorphism",
+      "institutionalization",
+      "intercrystallization",
+      "internationalization",
+      "internationalizationy"
+    ];
+
+    expect(matchPattern("2t2n14", words),
+        equals(["antianthropomorphism", "internationalization"]));
   });
 
   test('ignores case', () {
